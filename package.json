@@ -28,6 +28,7 @@
     "styled-components": "^5.3.6"
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
     "babel-eslint": "^10.1.0",
     "babel-plugin-import": "^1.13.5",
     "eslint": "^8.30.0",
