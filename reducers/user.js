@@ -10,6 +10,12 @@ const initialState = {
   signUpLoading: false,
   signUpDone: false,
   signUpError: null,
+  followLoading: false,
+  followDone: false,
+  followError: null,
+  unFollowLoading: false,
+  unFollowDone: false,
+  unFollowError: null,
   changeNicknameLoading: false,
   changeNicknameDone: false,
   changeNicknameError: null,
@@ -119,6 +125,36 @@ const reducer = (state = initialState, action) =>
       case SIGN_UP_FAILURE:
         draft.signUpLoading = false;
         draft.signUpError = action.error;
+        break;
+      case FOLLOW_REQUEST:
+        draft.followLoading = true;
+        draft.followDone = false;
+        draft.followError = null;
+        break;
+      case FOLLOW_SUCCESS:
+        draft.followLoading = false;
+        draft.followDone = true;
+        draft.me.Followings.push({ id: action.data });
+        break;
+      case FOLLOW_FAILURE:
+        draft.followLoading = false;
+        draft.followError = action.error;
+        break;
+      case UNFOLLOW_REQUEST:
+        draft.unFollowLoading = true;
+        draft.unFollowDone = false;
+        draft.unFollowError = null;
+        break;
+      case UNFOLLOW_SUCCESS:
+        draft.unFollowLoading = false;
+        draft.unFollowDone = true;
+        draft.me.Followings = draft.me.Followings.filter(
+          (v) => v.id !== action.data
+        );
+        break;
+      case UNFOLLOW_FAILURE:
+        draft.unFollowLoading = false;
+        draft.unFollowError = action.error;
         break;
       case CHANGE_NICKNAME_REQUEST:
         draft.changeNicknameLoading = true;
